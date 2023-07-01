@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
 
-    const LOCALE_CHAR_LEN = 5;
+    const LOCALE_CHAR_LEN = 2;
 
     /**
      * Run the migrations.
@@ -58,7 +58,7 @@ return new class extends Migration
         });
 
         Schema::create(Tables::$LANGUAGES, function (Blueprint $table) {
-            $table->char("locale", self::LOCALE_CHAR_LEN);
+            $table->string("locale", self::LOCALE_CHAR_LEN);
             $table->string("language");
             $table->softDeletes();
             $table->timestamps();
@@ -67,8 +67,7 @@ return new class extends Migration
 
         Schema::create(Tables::$CATEGORY_TRANSLATIONS, function (Blueprint $table) {
             $table->id();
-            $table->char("locale", self::LOCALE_CHAR_LEN)->index();
-            $table->foreign("locale")->references("locale")->on(Tables::$LANGUAGES);
+            $table->string("locale", self::LOCALE_CHAR_LEN)->index();
             $table->foreignId("category_id")->references("id")->on(Tables::$CATEGORIES);
             $table->string("title");
             $table->softDeletes();
@@ -77,8 +76,7 @@ return new class extends Migration
 
         Schema::create(Tables::$MEAL_TRANSLATIONS, function (Blueprint $table) {
             $table->id();
-            $table->char("locale", self::LOCALE_CHAR_LEN)->index();
-            $table->foreign("locale")->references("locale")->on(Tables::$LANGUAGES);
+            $table->string("locale", self::LOCALE_CHAR_LEN);
             $table->foreignId("meal_id")->references("id")->on(Tables::$MEALS)->onDelete("cascade");
             $table->string("title");
             $table->string("description");
@@ -88,8 +86,7 @@ return new class extends Migration
 
         Schema::create(Tables::$INGREDIENT_TRANSLATIONS, function (Blueprint $table) {
             $table->id();
-            $table->char("locale", self::LOCALE_CHAR_LEN)->index();
-            $table->foreign("locale")->references("locale")->on(Tables::$LANGUAGES);
+            $table->string("locale", self::LOCALE_CHAR_LEN)->index();
             $table->foreignId("ingredient_id")->references("id")->on(Tables::$INGREDIENTS)->onDelete("cascade");
             $table->string("title");
             $table->softDeletes();
@@ -98,8 +95,7 @@ return new class extends Migration
 
         Schema::create(Tables::$TAG_TRANSLATIONS, function (Blueprint $table) {
             $table->id();
-            $table->char("locale", self::LOCALE_CHAR_LEN)->index();
-            $table->foreign("locale")->references("locale")->on(Tables::$LANGUAGES);
+            $table->string("locale", self::LOCALE_CHAR_LEN)->index();
             $table->foreignId("tag_id")->references("id")->on(Tables::$TAGS)->onDelete("cascade");
             $table->string("title");
             $table->softDeletes();
@@ -122,7 +118,7 @@ return new class extends Migration
         Schema::dropIfExists(Tables::$TAG_TRANSLATIONS);
         Schema::dropIfExists(Tables::$INGREDIENT_TRANSLATIONS);
         Schema::dropIfExists(Tables::$MEAL_TRANSLATIONS);
-        Schema::dropIfExists(Tables::$CATEGORIE_TRANSLATIONS);
+        Schema::dropIfExists(Tables::$CATEGORY_TRANSLATIONS);
         Schema::dropIfExists(Tables::$LANGUAGES);
     }
 };
