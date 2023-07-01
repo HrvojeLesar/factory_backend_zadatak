@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("meals", [MealController::class, "handle"]);
+Route::get("/meals", [MealController::class, "handle"]);
+Route::get("/add", [MealController::class, "add"]);
