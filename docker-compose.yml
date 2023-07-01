@@ -1,16 +1,28 @@
 version: '3.8'
 
 services:
-  jela_svijeta_db_dev:
-    image: postgres:14
-    env_file: docker/.env
-    restart: unless-stopped
-    container_name: jela_svijeta_db
-    ports:
-      - "4163:5432"
-    volumes:
-      - jela_svijeta_volume:/var/lib/postgresql/data
+    jela_svijeta_db_dev:
+        image: postgres:14
+        env_file: docker/db/.env
+        restart: unless-stopped
+        container_name: jela_svijeta_db
+        ports:
+            - "4163:5432"
+        volumes:
+            - jela_svijeta_volume:/var/lib/postgresql/data
+
+    jela_svijeta_web_server_dev:
+        env_file: docker/web/.env
+        restart: unless-stopped
+        container_name: jela_svijeta_web_server_dev
+        build: docker/web
+        volumes:
+            - ./:/app
+        ports:
+            - 8000:8000
+        depends_on:
+            - jela_svijeta_db_dev
 
 volumes:
-  jela_svijeta_volume:
-    external: false
+    jela_svijeta_volume:
+        external: false
