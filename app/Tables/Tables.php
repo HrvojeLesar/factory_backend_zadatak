@@ -12,8 +12,8 @@ class Tables
     public static string $MEAL_TAGS = "meal_tags";
 
     public static string $LANGUAGES = "languages";
-    public static string $MEALS_TRANSLATIONS = "meals_translations";
-    public static string $INGREDIENTS_TRANSLATIONS = "ingredients_translations";
-    public static string $CATEGORIES_TRANSLATIONS = "categories_translations";
-    public static string $TAGS_TRANSLATIONS = "tags_translations";
+    public static string $MEAL_TRANSLATIONS = "meal_translations";
+    public static string $INGREDIENT_TRANSLATIONS = "ingredient_translations";
+    public static string $CATEGORY_TRANSLATIONS = "category_translations";
+    public static string $TAG_TRANSLATIONS = "tag_translations";
 }
