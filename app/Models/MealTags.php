@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Tables\Tables;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class MealTags extends Pivot
 {
-    // protected $table = Tables::$MEAL_TAGS;
+    use HasFactory;
     protected $table = "meal_tags";
 }
