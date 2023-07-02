@@ -24,13 +24,13 @@ class ListValidator implements ValidationRule
         switch ($this->allowedKeywords) {
             case null: {
                     if (!$this->validateNumeric($values)) {
-                        $fail("Must be a list of keywords");
+                        $fail("Must be a list of positive numeric values larger than 0.");
                     }
                     break;
                 }
             default: {
                     if (!$this->validateByKeywords($values)) {
-                        $fail("Must be a list of numeric values");
+                        $fail("Must be a list of keywords (ingredients|category|tags).");
                     }
                     break;
                 }
