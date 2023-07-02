@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class MealTagsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "tag_id" => fake()->randomElement(Tag::all("id")->pluck("id")->toArray())
         ];
     }
 }

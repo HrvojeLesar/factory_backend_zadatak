@@ -52,17 +52,20 @@ class MealFactory extends Factory
                     ->count(fake()->numberBetween(1, 15))
                     ->create([
                         "meal_id" => $meal->id,
-                        "ingredient_id" => Ingredient::all()->random()->id,
-                    ]);
-
-                MealTags::factory()
-                    ->count(fake()->numberBetween(1, 5))
-                    ->create([
-                        "meal_id" => $meal->id,
-                        "tag_id" => Tag::all()->random()->id,
                     ]);
             } catch (Exception) {
-                // Ignores duplicate insertions
+                //Ignores duplicate insertions
+            }
+
+            try {
+
+                MealTags::factory()
+                    ->count(fake()->numberBetween(1, 10))
+                    ->create([
+                        "meal_id" => $meal->id,
+                    ]);
+            } catch (Exception) {
+                //Ignores duplicate insertions
             }
         });
     }

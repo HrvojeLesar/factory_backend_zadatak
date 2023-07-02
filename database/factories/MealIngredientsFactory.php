@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Ingredient;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class MealIngredientsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "ingredient_id" => fake()->randomElement(Ingredient::all("id")->pluck("id")->toArray())
         ];
     }
 }
