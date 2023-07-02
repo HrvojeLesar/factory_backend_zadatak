@@ -25,7 +25,11 @@ class MealFactory extends Factory
      */
     public function definition(): array
     {
+        $created_at = fake()->dateTime();
         return [
+            "created_at" => $created_at,
+            "updated_at" => fake()->boolean(50) ? fake()->dateTimeBetween($created_at, "now") : null,
+            "deleted_at" => fake()->boolean(20) ? fake()->dateTimeBetween($created_at, "now") : null,
             "category_id" => fake()->boolean(70) ? Category::all()->random()->id : null,
         ];
     }
@@ -58,7 +62,6 @@ class MealFactory extends Factory
             }
 
             try {
-
                 MealTags::factory()
                     ->count(fake()->numberBetween(1, 10))
                     ->create([
