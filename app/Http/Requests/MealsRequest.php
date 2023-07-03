@@ -31,7 +31,7 @@ class MealsRequest extends FormRequest
         return [
             self::$PER_PAGE => ["integer", "numeric", "min:1"],
             self::$PAGE => ["integer", "numeric", "min:1"],
-            self::$CATEGORY => [new CategoryValidator("abc")],
+            self::$CATEGORY => [new CategoryValidator($this->query(self::$CATEGORY))],
             self::$TAGS => [new ListValidator()],
             self::$WITH => [new ListValidator(["ingredients", "category", "tags"])],
             self::$LANG => ["required", Rule::in($languages)],

@@ -68,7 +68,7 @@ class Meal extends Model
 
     public function category(): HasOne
     {
-        return $this->hasOne(Category::class, "id");
+        return $this->hasOne(Category::class, "id", "category_id");
     }
 
     public function scopeFilterCategory(Builder $query, string|array|null $category_value)
@@ -78,11 +78,11 @@ class Meal extends Model
                     break;
                 }
             case "NULL": {
-                    $query->where("category_id", "=", null);
+                    $query->whereNull("category_id");
                     break;
                 }
             case "!NULL": {
-                    $query->where("category_id", "!=", null);
+                    $query->whereNotNull("category_id");
                     break;
                 }
             default: {

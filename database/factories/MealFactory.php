@@ -38,8 +38,14 @@ class MealFactory extends Factory
     {
         return $this->afterCreating(function (Meal $meal) {
             $created_at = fake()->dateTime();
-            $langauges = Language::all("locale")->map(function ($locale) {
-                return ["locale" => $locale, "title" => fake()->word(), "description" => fake()->text()];
+            $langauges = Language::all("locale")->pluck("locale")->map(function ($locale) use ($meal) {
+                return [
+                    "locale" => $locale,
+                    "title" => $locale === "hr" ? sprintf("Naslov jela %d na HRV jeziku", $meal->id)
+                        : ($locale === "en" ? sprintf("Title for meal %d", $meal->id) : fake()->word()),
+                    "description" => $locale === "hr" ? sprintf("Opis jela %d", $meal->id)
+                        : ($locale === "en" ? sprintf("Meal description %d", $meal->id) : fake()->text())
+                ];
             })->toArray();
             MealTranslation::factory()
                 ->count(count($langauges))

@@ -25,8 +25,12 @@ class IngredientFactory extends Factory
     {
         return $this->afterCreating(function (Ingredient $ingredient) {
             $created_at = fake()->dateTime();
-            $langauges = Language::all("locale")->map(function ($locale) {
-                return ["locale" => $locale, "title" => fake()->word()];
+            $langauges = Language::all("locale")->pluck("locale")->map(function ($locale) use ($ingredient) {
+                return [
+                    "locale" => $locale,
+                    "title" => $locale === "hr" ? sprintf("Naslov stastojka %d", $ingredient->id)
+                        : ($locale === "en" ? sprintf("Ingredient title %d", $ingredient->id) : fake()->word())
+                ];
             })->toArray();
             IngredientTranslation::factory()
                 ->count(count($langauges))
