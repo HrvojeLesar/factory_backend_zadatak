@@ -3,13 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Category;
-use App\Models\Ingredient;
 use App\Models\Language;
 use App\Models\Meal;
 use App\Models\MealIngredients;
 use App\Models\MealTags;
 use App\Models\MealTranslation;
-use App\Models\Tag;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
