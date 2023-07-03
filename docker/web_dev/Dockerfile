@@ -4,9 +4,6 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-COPY . /app
-COPY ./docker/web_dev/.env /app
-
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     lsb-release \
@@ -23,7 +20,5 @@ RUN apt-get update \
     php8.1-curl \
     php8.1-pgsql \
     composer
-
-RUN composer install
 
 CMD [ "php", "artisan", "serve", "--host", "0.0.0.0" ]

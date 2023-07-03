@@ -11,13 +11,13 @@ services:
         volumes:
             - jela_svijeta_db_volume:/var/lib/postgresql/data
 
-    jela_svijeta_web_server:
+    jela_svijeta_web_server_dev:
         env_file: docker/web/.env
         restart: unless-stopped
-        container_name: jela_svijeta_web_server
-        build:
-            context: ./
-            dockerfile: docker/web/Dockerfile
+        container_name: jela_svijeta_web_server_dev
+        build: docker/web_dev
+        volumes:
+            - ./:/app
         ports:
             - 8000:8000
         depends_on:
